@@ -78,13 +78,11 @@ function formatQueryParamsInternal({
 
   if (value instanceof Date) {
     // The ClickHouse server parses numbers as time-zone-agnostic Unix timestamps
+    // DateTime type only accepts integer seconds, so we always truncate milliseconds
     const unixTimestamp = Math.floor(value.getTime() / 1000)
       .toString()
       .padStart(10, '0')
-    const milliseconds = value.getUTCMilliseconds()
-    return milliseconds === 0
-      ? unixTimestamp
-      : `${unixTimestamp}.${milliseconds.toString().padStart(3, '0')}`
+    return unixTimestamp
   }
 
   // (42,'foo',NULL)
