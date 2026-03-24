@@ -99,5 +99,8 @@
     "*.md": [
       "prettier --write"
     ]
+  },
+  "dependencies": {
+    "jsdom": "^29.0.1"
   }
 }
